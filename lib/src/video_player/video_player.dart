@@ -692,7 +692,7 @@ class _VideoPlayerState extends State<VideoPlayer> {
   @override
   Widget build(BuildContext context) {
     return _textureId == null
-        ? Container()
+        ? SizedBox()
         : _videoPlayerPlatform.buildView(_textureId);
   }
 }

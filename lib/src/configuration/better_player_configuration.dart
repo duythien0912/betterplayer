@@ -38,6 +38,9 @@ class BetterPlayerConfiguration {
   /// true.
   final bool placeholderOnTop;
 
+  /// Should the subtitles drawer
+  final bool showSubtitlesDrawer;
+
   /// A widget which is placed between the video and the controls
   final Widget? overlay;
 
@@ -126,6 +129,7 @@ class BetterPlayerConfiguration {
     this.fullScreenByDefault = false,
     this.placeholder,
     this.showPlaceholderUntilPlay = false,
+    this.showSubtitlesDrawer = true,
     this.placeholderOnTop = true,
     this.overlay,
     this.errorBuilder,
@@ -166,6 +170,7 @@ class BetterPlayerConfiguration {
     bool? fullScreenByDefault,
     Widget? placeholder,
     bool? showPlaceholderUntilPlay,
+    bool? showSubtitlesDrawer,
     bool? placeholderOnTop,
     Widget? overlay,
     bool? showControlsOnInitialize,
@@ -198,6 +203,7 @@ class BetterPlayerConfiguration {
       placeholder: placeholder ?? this.placeholder,
       showPlaceholderUntilPlay:
           showPlaceholderUntilPlay ?? this.showPlaceholderUntilPlay,
+      showSubtitlesDrawer: showSubtitlesDrawer ?? this.showSubtitlesDrawer,
       placeholderOnTop: placeholderOnTop ?? this.placeholderOnTop,
       overlay: overlay ?? this.overlay,
       errorBuilder: errorBuilder ?? this.errorBuilder,

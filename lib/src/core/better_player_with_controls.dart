@@ -108,7 +108,7 @@ class _BetterPlayerWithControlsState extends State<BetterPlayerWithControls> {
     }
   }
 
-  Container _buildPlayerWithControls(
+  Widget _buildPlayerWithControls(
       BetterPlayerController betterPlayerController, BuildContext context) {
     final configuration = betterPlayerController.betterPlayerConfiguration;
     var rotation = configuration.rotation;
@@ -118,12 +118,14 @@ class _BetterPlayerWithControlsState extends State<BetterPlayerWithControls> {
       rotation = 0;
     }
     if (betterPlayerController.betterPlayerDataSource == null) {
-      return Container();
+      return SizedBox();
     }
     _initialized = true;
 
     final bool placeholderOnTop =
         betterPlayerController.betterPlayerConfiguration.placeholderOnTop;
+    final bool showSubtitlesDrawer =
+        betterPlayerController.betterPlayerConfiguration.showSubtitlesDrawer;
     // ignore: avoid_unnecessary_containers
     return Container(
       child: Stack(
@@ -138,13 +140,14 @@ class _BetterPlayerWithControlsState extends State<BetterPlayerWithControls> {
             ),
           ),
           betterPlayerController.betterPlayerConfiguration.overlay ??
-              Container(),
-          BetterPlayerSubtitlesDrawer(
-            betterPlayerController: betterPlayerController,
-            betterPlayerSubtitlesConfiguration: subtitlesConfiguration,
-            subtitles: betterPlayerController.subtitlesLines,
-            playerVisibilityStream: playerVisibilityStreamController.stream,
-          ),
+              SizedBox(),
+          if (showSubtitlesDrawer)
+            BetterPlayerSubtitlesDrawer(
+              betterPlayerController: betterPlayerController,
+              betterPlayerSubtitlesConfiguration: subtitlesConfiguration,
+              subtitles: betterPlayerController.subtitlesLines,
+              playerVisibilityStream: playerVisibilityStreamController.stream,
+            ),
           if (!placeholderOnTop) _buildPlaceholder(betterPlayerController),
           _buildControls(context, betterPlayerController),
         ],
@@ -155,7 +158,7 @@ class _BetterPlayerWithControlsState extends State<BetterPlayerWithControls> {
   Widget _buildPlaceholder(BetterPlayerController betterPlayerController) {
     return betterPlayerController.betterPlayerDataSource!.placeholder ??
         betterPlayerController.betterPlayerConfiguration.placeholder ??
-        Container();
+        SizedBox();
   }
 
   Widget _buildControls(
